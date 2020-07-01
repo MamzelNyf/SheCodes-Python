@@ -43,6 +43,16 @@ print()
 
 # Q3
 
+# with extend
+user_name_1 = input("You will have to enter 3 names. Enter the first name: ")
+user_name_2 = input("Enter the second name: ")
+user_name_3 = input("Enter the third name: ")
+user_list = []
+
+user_list.extend([user_name_1,user_name_2,user_name_3])
+print(user_list)
+
+# with append
 user_name_1="Izzy"
 user_name_2="Archie"
 user_name_3="Boston"
