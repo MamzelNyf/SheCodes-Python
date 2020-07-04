@@ -61,7 +61,8 @@ items_prices = []
 
 for item in groceries:
     units_price = int(input(f"how many units of {item[0]} did you buy? "))
-    units_price = item[1] * units_price
+    # assigment operator *= -> units_price = item[1]units_price
+    units_price *= item[1]
     #print (units_price)
     items_prices.append(units_price)
     #print (items_prices)
