@@ -39,7 +39,7 @@ print()
 
 # Q3
 # create a function to count a number aof element in a list with sublists 
-def countColour(colourList, colour):
+def count_colour(colourList, colour):
     colourList = [item for sublist in colourList for item in sublist]
     #   flatten the sublists in a list to be able to count the occurences
     #     flat_list = []
@@ -56,16 +56,16 @@ colour_csv = input("Choose between colours_20.csv and colours_213.csv: ")
 
 while colour_csv != "colours_20.csv" or colour_csv != "colours_213.csv" :
     if colour_csv == "colours_20.csv":
-        red = countColour(colours_output_20,"red")
-        green = countColour(colours_output_20,"green")
-        blue = countColour(colours_output_20,"blue")
+        red = count_colour(colours_output_20,"red")
+        green = count_colour(colours_output_20,"green")
+        blue = count_colour(colours_output_20,"blue")
         print(f"Red: {red} \nGreen: {green} \nBlue: {blue} ")
         break
 
     elif colour_csv == "colours_213.csv":
-        red = countColour(colours_output_213,"red")
-        green = countColour(colours_output_213,"green")
-        blue = countColour(colours_output_213,"blue")
+        red = count_colour(colours_output_213,"red")
+        green = count_colour(colours_output_213,"green")
+        blue = count_colour(colours_output_213,"blue")
         print(f"Red: {red} \nGreen: {green} \nBlue: {blue} ")
         break
 
