@@ -138,7 +138,18 @@ class Vehicle:
     def rev_engine(self):
         print("VRRRMMMM!")
 
+    
+
     def fuel_left(self, distance_driven, refuelled, distance_after_refuelled):
+        
+        def fuel_comparison(fuel_available):
+            if fuel_available < 20 and fuel_available > 0: 
+                print(f"You have only {fuel_available}L of fuel left. Refuelled urgently!")
+            elif fuel_available > 20:
+                print(f"You have {fuel_available}L of fuel left.")
+            else:
+                print(f"You are out of gaz.")
+        
         if distance_driven > self.fuel_available:
             max_distance = self.max_fuel - self.fuel_available
             print(f"You can drive maximum {max_distance}km with your leftover fuel.")
@@ -147,20 +158,11 @@ class Vehicle:
             print("Your tank is full")
         elif refuelled and distance_after_refuelled != 0:
             self.fuel_available = self.max_fuel - (distance_after_refuelled * self.fuel_consumption_per_km)
-            if self.fuel_available < 20 and self.fuel_available > 0: 
-                print(f"You have only {self.fuel_available}L of fuel left. Refuelled urgently!")
-            elif self.fuel_available <0:
-                print(f"You are out of gaz.")
-            else:
-                print(f"You have {self.fuel_available}L of fuel left.")
+            fuel_comparison(self.fuel_available)
         else:
             self.fuel_available -= (distance_driven * self.fuel_consumption_per_km)
-            if self.fuel_available < 20 and self.fuel_available > 0: 
-                print(f"You have only {self.fuel_available}L of fuel left. Refuelled urgently!")
-            elif self.fuel_available > 20:
-                print(f"You have {self.fuel_available}L of fuel left.")
-            else:
-                print(f"You are out of gaz.")
+            fuel_comparison(self.fuel_available)
+
         
 
 vehicle_1 = Vehicle("Peugeot", "206", "blue", 4, 150, 100, 50)
