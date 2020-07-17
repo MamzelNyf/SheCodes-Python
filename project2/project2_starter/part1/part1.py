@@ -59,52 +59,50 @@ def process_weather(forecast_file):
     with open(forecast_file) as json_file:
         forecast_data = json.load(json_file)
 
-        # Create a list to save dates and temperatures for the period
-        temperature_average = t = [[],[],[]]
-        output_daily = []
-        for items in forecast_data["DailyForecasts"]:
-            converted_date = convert_date(items["Date"])
-            t[0].append(converted_date)
-            output_daily.append("-------- " + converted_date + " --------")
+    # Create a list to save dates and temperatures for the period
+    temperature_average = t = [[],[],[]]
+    output_daily = []
+    for items in forecast_data["DailyForecasts"]:
+        converted_date = convert_date(items["Date"])
+        t[0].append(converted_date)
+        output_daily.append("-------- " + converted_date + " --------")
 
-            min_temp_per_date = convert_f_to_c(items["Temperature"]["Minimum"]["Value"])
-            t[1].append(min_temp_per_date)
-            output_daily.append("Minimum Temperature: " + format_temperature(str(min_temp_per_date)))
-            
-            max_temp_per_date = convert_f_to_c(items["Temperature"]["Maximum"]["Value"])
-            t[2].append(max_temp_per_date)
-            output_daily.append("Maximum Temperature: " + format_temperature(str(max_temp_per_date)))
+        min_temp_per_date = convert_f_to_c(items["Temperature"]["Minimum"]["Value"])
+        t[1].append(min_temp_per_date)
+        output_daily.append("Minimum Temperature: " + format_temperature(str(min_temp_per_date)))
         
-            output_daily.append(f"""Daytime: {items["Day"]["LongPhrase"]}""")
-            output_daily.append(f"""    Chance of rain:  {items["Day"]["RainProbability"]}%""")
-            output_daily.append(f"""Nighttime: {items["Night"]["LongPhrase"]}""")
-            output_daily.append(f"""    Chance of rain:  {items["Night"]["RainProbability"]}%\n""")
-        # print(t)
-        # print(output_daily)
-        
-        # Save min and max temperature for the period, save index for corresponding date
-        # min_temp_for_period = min(t[1])
-        # max_temp_for_period = max(t[2])
-        min_temp_day = t[0][t[1].index(min(t[1]))]
-        max_temp_day = t[0][t[2].index(max(t[2]))]
-        # print(f"{min_temp_for_period}, {max_temp_for_period}, {min_temp_day}, {max_temp_day}")
+        max_temp_per_date = convert_f_to_c(items["Temperature"]["Maximum"]["Value"])
+        t[2].append(max_temp_per_date)
+        output_daily.append("Maximum Temperature: " + format_temperature(str(max_temp_per_date)))
+    
+        output_daily.append(f"""Daytime: {items["Day"]["LongPhrase"]}""")
+        output_daily.append(f"""    Chance of rain:  {items["Day"]["RainProbability"]}%""")
+        output_daily.append(f"""Nighttime: {items["Night"]["LongPhrase"]}""")
+        output_daily.append(f"""    Chance of rain:  {items["Night"]["RainProbability"]}%\n""")
+    # print(t)
+    # print(output_daily)
+    
+    # Save min and max temperature for the period, save index for corresponding date
+    # min_temp_for_period = min(t[1])
+    # max_temp_for_period = max(t[2])
+    min_temp_day = t[0][t[1].index(min(t[1]))]
+    max_temp_day = t[0][t[2].index(max(t[2]))]
+    # print(f"{min_temp_for_period}, {max_temp_for_period}, {min_temp_day}, {max_temp_day}")
 
-        # Calculate mean of temperature for the period
-        #number_days = len(t[0])
-        min_temp_mean = calculate_mean(sum(t[1]), len(t[0]))
-        max_temp_mean = calculate_mean(sum(t[2]), len(t[0]))
-        # print(f"{number_days}, {min_temp_mean}, {max_temp_mean}")
+    # Calculate mean of temperature for the period
+    #number_days = len(t[0])
+    min_temp_mean = calculate_mean(sum(t[1]), len(t[0]))
+    max_temp_mean = calculate_mean(sum(t[2]), len(t[0]))
+    # print(f"{number_days}, {min_temp_mean}, {max_temp_mean}")
 
-        output_header = f"""{len(t[0])} Day Overview
+    output_header = f"""{len(t[0])} Day Overview
     The lowest temperature will be {format_temperature(min(t[1]))}, and will occur on {min_temp_day}.
     The highest temperature will be {format_temperature(max(t[2]))}, and will occur on {max_temp_day}.
     The average low this week is {format_temperature(min_temp_mean)}.
-    The average high this week is {format_temperature(max_temp_mean)}.
+    The average high this week is {format_temperature(max_temp_mean)}.\n
 """
 
-    return output_header + "\n".join(output_daily)
-
-
+    return output_header + "\n".join(output_daily) + "\n"
 
 
 if __name__ == "__main__":
