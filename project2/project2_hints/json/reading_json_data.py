@@ -16,18 +16,17 @@ import json
     # data = json.load(f)
 
 
-import os
-
+# import os
 # find the absolute path of the present file 
-dir_name = os.path.dirname(os.path.abspath(__file__))
+# dir_name = os.path.dirname(os.path.abspath(__file__))
 #print(dir_name)
 
 # add the folder and filename to the absolute path to find the file
-json_file_path = os.path.join(dir_name, "data", "quiz.json")
+# json_file_path = os.path.join(dir_name, "data", "quiz.json")
 #print(json_file_path)
 
 # load the json file
-with open(json_file_path) as json_file:
+with open("data/quiz.json") as json_file:
     data = json.load(json_file)
 
 #print(data)
