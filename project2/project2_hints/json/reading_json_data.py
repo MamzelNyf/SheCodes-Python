@@ -36,9 +36,7 @@ with open(json_file_path) as json_file:
     
 for key, value in data.items():
     for k1, v1 in value.items():
-            print (f"Question {k1}: {v1['question']}")
-            print ('\t'f"{v1['options'][0]}")
-            print ('\t'f"{v1['options'][1]}")
-            print ('\t'f"{v1['options'][2]}")
-            print ('\t'f"{v1['options'][3]}")
-
+        print (f"Question {k1}: {v1['question']}")
+        for option in v1['options']:
+            print ('\t'f"{option}")
+            
