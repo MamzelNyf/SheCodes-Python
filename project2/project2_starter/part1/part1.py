@@ -22,7 +22,6 @@ def convert_date(iso_string):
     d = datetime.strptime(iso_string, "%Y-%m-%dT%H:%M:%S%z")
     return d.strftime('%A %d %B %Y')
 
-
 def convert_f_to_c(temp_in_farenheit):
     """Converts an temperature from farenheit to celcius
     Args:
@@ -75,6 +74,7 @@ def process_weather(forecast_file):
         t[2].append(max_temp_per_date)
         output_daily.append("Maximum Temperature: " + format_temperature(str(max_temp_per_date)))
     
+        # Append data from a loop in a list to be able to return it formatted
         output_daily.append(f"""Daytime: {items["Day"]["LongPhrase"]}""")
         output_daily.append(f"""    Chance of rain:  {items["Day"]["RainProbability"]}%""")
         output_daily.append(f"""Nighttime: {items["Night"]["LongPhrase"]}""")
@@ -95,15 +95,15 @@ def process_weather(forecast_file):
     max_temp_mean = calculate_mean(sum(t[2]), len(t[0]))
     # print(f"{number_days}, {min_temp_mean}, {max_temp_mean}")
 
+    # save a formatted text in a variable to be able to return it
     output_header = f"""{len(t[0])} Day Overview
     The lowest temperature will be {format_temperature(min(t[1]))}, and will occur on {min_temp_day}.
     The highest temperature will be {format_temperature(max(t[2]))}, and will occur on {max_temp_day}.
     The average low this week is {format_temperature(min_temp_mean)}.
     The average high this week is {format_temperature(max_temp_mean)}.\n
 """
-
+    # Join all items in a list into a string, using a character as separator:
     return output_header + "\n".join(output_daily) + "\n"
-
 
 if __name__ == "__main__":
     print(process_weather("data/forecast_5days_b.json"))
